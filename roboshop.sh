@@ -9,9 +9,9 @@ DOMAIN_NAME="joindevopstest.online"
 for i in "${INSTANCE_NAME[@]}"; 
 do
   echo "out put of the i >>>>>>>>>>>  $i"
-    (aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name "Ansible" --security-group-ids $SECURITY_GROUP_IDS --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+  IP_ADDRESS=$(aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name "Ansible" --security-group-ids $SECURITY_GROUP_IDS --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
 
-    echo "$i: $IP_ADDRESS"
+    e"$i: $IP_ADDRESS"
 
 
      aws route53 change-resource-record-sets \
@@ -26,7 +26,7 @@ do
             ,"Type"             : "A"
             ,"TTL"              : 1
             ,"ResourceRecords"  : [{
-                "Value"         : "'$i: $IP_ADDRESS'"
+                "Value"         : "'$IP_ADDRESS'"
             }]
         }
         }]
