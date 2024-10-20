@@ -6,7 +6,7 @@ SECURITY_GROUP_IDS="sg-06c8e46fed96c970d"
 KEY_NAME="/root/satya/Ansible.pem"
 ZONE_ID="Z02733572PIKGQZR8W2GI"
 DOMAIN_NAME="joindevopstest.online"
-for i=0 in "${INSTANCE_NAME[@]}"; 
+for i in "${INSTANCE_NAME[@]}"; 
 do
     (aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name $KEY_NAME --security-group-ids $SECURITY_GROUP_IDS  
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
