@@ -8,8 +8,8 @@ ZONE_ID="Z02733572PIKGQZR8W2GI"
 DOMAIN_NAME="joindevopstest.online"
 for i in "${INSTANCE_NAME[@]}"; 
 do
-    (aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name $KEY_NAME --security-group-ids $SECURITY_GROUP_IDS  
-    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+    (aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name "Ansible" --security-group-ids $SECURITY_GROUP_IDS --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+
     echo "$i: $IP_ADDRESS"
 
 
