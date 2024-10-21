@@ -1,5 +1,5 @@
 #!/bin/bash
-INSTANCE_NAME=("web" "user" "Catalogue")
+INSTANCE_NAME=("web" "user")
 IMAGE_ID="ami-02db68a01488594c5"
 INSTANCE_TYPE='t3.micro'
 SECURITY_GROUP_IDS="sg-06c8e46fed96c970d"
@@ -8,8 +8,7 @@ ZONE_ID="Z02733572PIKGQZR8W2GI"
 DOMAIN_NAME="joindevopstest.online"
 for i in "${INSTANCE_NAME[@]}"; 
 do
-  echo "out put of the i >>>>>>>>>>>  $i"
-  IP_ADDRESS=$(aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name "Ansible" --security-group-ids $SECURITY_GROUP_IDS --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+IP_ADDRESS=$(aws ec2 run-instances --image-id $IMAGE_ID --instance-type $INSTANCE_TYPE --key-name "Ansible" --security-group-ids $SECURITY_GROUP_IDS --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
 
     echo "$i: $IP_ADDRESS"
      aws route53 change-resource-record-sets \
