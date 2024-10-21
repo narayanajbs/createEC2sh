@@ -1,5 +1,5 @@
 #!/bin/bash
-INSTANCE_NAME=("web" "user")
+INSTANCE_NAME=("mongodb")
 IMAGE_ID="ami-02db68a01488594c5"
 INSTANCE_TYPE='t3.micro'
 SECURITY_GROUP_IDS="sg-06c8e46fed96c970d"
